@@ -1,222 +1,142 @@
 # Collaborative Song Feedback Tool
 
-A web application that enables musicians, producers, and collaborators to provide structured feedback on music tracks with real-time collaboration, version tracking, and AI-assisted analysis.
+A modern web application designed to streamline the music production and review process by providing a platform for structured, contextual feedback on audio tracks.
 
-## 🎵 Overview
+## Features
 
-The Collaborative Song Feedback Tool addresses a critical need in the music production workflow by providing structured, context-aware feedback mechanisms that enhance creative collaboration. The platform streamlines the revision process, improves communication between collaborators, and ultimately helps artists create better music more efficiently.
+- **Time-stamped Comments**: Leave feedback at specific points in a track
+- **Visual Waveform Interface**: See comments in context with the audio
+- **Version Control**: Track changes and progress across multiple versions
+- **Collaboration Tools**: Work together with your team in real-time
+- **Project Management**: Organize tracks by project and manage access
+- **Mobile Responsive**: Give and receive feedback on any device
 
-## ✨ Key Features
-
-### Core Features
-
-- **Real-time Audio Playback and Annotation**
-  - Time-stamped comments on specific sections of tracks
-  - Frequency range marking on audio visualizations for precise feedback
-
-- **Version Control and History**
-  - Upload and compare multiple versions of songs
-  - Complete history of changes and comments to track evolution
-
-- **Collaboration Management**
-  - Role-based permissions system for team members
-  - Notification system for updates and comments
-
-- **Integration Capabilities**
-  - Import/export tracks from common DAWs with metadata
-  - Share feedback sessions to streaming platforms or social media
-
-- **Mobile Responsiveness**
-  - Review and respond to feedback on mobile devices
-  - Record quick vocal demonstrations through mobile interface
-
-### Advanced Features
-
-- **AI-Assisted Feedback**
-  - Automatic detection of technical issues (clipping, phase problems)
-  - AI-generated suggestions for song structure and arrangements
-
-- **Analytics Dashboard**
-  - Metrics on feedback implementation rates and project progress
-  - Identification of most-commented sections to focus revisions
-
-- **Rights Management**
-  - Contribution tracking and automatic split sheet generation
-  - Terms agreement system for all collaborators
-
-## 🛠️ Technology Stack
+## Technology Stack
 
 ### Frontend
 - React.js with TypeScript
-- Redux for global state management
-- Material-UI for responsive design
-- Web Audio API for waveform visualization
+- Redux for state management
+- Material-UI components
+- Web Audio API and Wavesurfer.js for audio visualization
 - Socket.io for real-time updates
 
 ### Backend
-- Node.js with Express.js
-- MongoDB for database
+- Node.js with Express
+- MongoDB for data storage
 - JWT authentication
-- Redis for caching
-- Elasticsearch for search
+- Socket.io for real-time communication
+- AWS S3 for audio file storage
 
-### Infrastructure
-- AWS (EC2, S3, CloudFront)
-- GitHub Actions for CI/CD
-- Docker for containerization
-
-## 📋 System Architecture
-
-The system follows a microservices architecture with the following components:
-
-1. **Client Application**
-   - Web and mobile interfaces
-   - Real-time collaboration features
-   - Audio processing capabilities
-
-2. **API Gateway**
-   - Route management
-   - Authentication and authorization
-   - Rate limiting
-
-3. **Microservices**
-   - User Service
-   - Project Service
-   - Comment Service
-   - Version Service
-   - Notification Service
-
-4. **Storage Layer**
-   - Document database (MongoDB)
-   - Object storage (S3)
-   - Caching layer (Redis)
-
-5. **Background Workers**
-   - Audio processing jobs
-   - AI analysis tasks
-   - Notification dispatch
-
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
-
-- Node.js (v16+)
-- MongoDB
-- Redis
-- AWS Account (for production deployment)
+- Node.js (v14+)
+- MongoDB (v4+)
+- npm or yarn
 
 ### Installation
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/dxaginfo/music-collab-feedback-tool.git
-   cd music-collab-feedback-tool
-   ```
-
-2. Install dependencies:
-   ```bash
-   # Install backend dependencies
-   cd server
-   npm install
-
-   # Install frontend dependencies
-   cd ../client
-   npm install
-   ```
-
-3. Configure environment variables:
-   ```bash
-   # Copy example environment files
-   cp server/.env.example server/.env
-   cp client/.env.example client/.env
-
-   # Edit the .env files with your configuration
-   ```
-
-4. Run development servers:
-   ```bash
-   # Start backend server
-   cd server
-   npm run dev
-
-   # Start frontend application
-   cd ../client
-   npm start
-   ```
-
-### Deployment
-
-For production deployment, we use Docker and AWS:
-
-1. Build Docker images:
-   ```bash
-   docker-compose build
-   ```
-
-2. Deploy to AWS:
-   ```bash
-   # Configure AWS credentials
-   aws configure
-
-   # Deploy using CloudFormation template
-   aws cloudformation deploy --template-file deployment/cloudformation.yml --stack-name music-collab-feedback --capabilities CAPABILITY_IAM
-   ```
-
-## 📝 API Documentation
-
-Our API follows RESTful principles with the following main endpoints:
-
-### Authentication
-- `POST /api/auth/register` - Create new user account
-- `POST /api/auth/login` - User login
-- `GET /api/auth/me` - Get current user info
-
-### Projects
-- `GET /api/projects` - List user's projects
-- `POST /api/projects` - Create new project
-- `GET /api/projects/:id` - Get project details
-
-### Tracks
-- `POST /api/projects/:id/tracks` - Upload new track
-- `GET /api/tracks/:id` - Get track details
-- `GET /api/tracks/:id/waveform` - Get track waveform data
-
-### Comments
-- `GET /api/tracks/:id/comments` - Get comments for track
-- `POST /api/tracks/:id/comments` - Add new comment
-- `PUT /api/comments/:id` - Update comment
-
-## 🧪 Testing
-
-Run tests with the following commands:
-
+1. Clone the repository
 ```bash
-# Run backend tests
-cd server
-npm test
-
-# Run frontend tests
-cd client
-npm test
-
-# Run end-to-end tests
-npm run test:e2e
+git clone https://github.com/dxaginfo/music-collab-feedback-tool.git
+cd music-collab-feedback-tool
 ```
 
-## 📄 License
+2. Install dependencies for both client and server
+```bash
+# Install server dependencies
+cd server
+npm install
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+# Install client dependencies
+cd ../client
+npm install
+```
 
-## 🤝 Contributing
+3. Set up environment variables
+```bash
+# In the server directory, create a .env file with:
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+AWS_ACCESS_KEY_ID=your_aws_access_key
+AWS_SECRET_ACCESS_KEY=your_aws_secret_key
+AWS_BUCKET_NAME=your_s3_bucket_name
+```
+
+4. Start the development servers
+```bash
+# Start the backend server (from the server directory)
+npm run dev
+
+# Start the frontend server (from the client directory)
+npm start
+```
+
+## API Documentation
+
+The API documentation is available at `/api/docs` when running the development server.
+
+### Main Endpoints:
+
+- **Authentication**: `/api/auth/*`
+- **Projects**: `/api/projects/*`
+- **Tracks**: `/api/tracks/*`
+- **Comments**: `/api/comments/*`
+
+## Project Structure
+
+```
+music-collab-feedback-tool/
+├── client/                 # React frontend
+│   ├── public/             # Static files
+│   └── src/                # Source files
+│       ├── components/     # React components
+│       ├── context/        # React context providers
+│       ├── hooks/          # Custom React hooks
+│       ├── pages/          # Page components
+│       ├── redux/          # Redux store and slices
+│       ├── services/       # API service functions
+│       └── utils/          # Utility functions
+├── server/                 # Node.js backend
+│   ├── src/                # Source files
+│   │   ├── controllers/    # API controllers
+│   │   ├── middleware/     # Custom middleware
+│   │   ├── models/         # Mongoose models
+│   │   ├── routes/         # API routes
+│   │   └── utils/          # Utility functions
+│   └── uploads/            # Temporary file uploads
+└── README.md               # Project documentation
+```
+
+## Deployment
+
+### Backend Deployment
+1. Set up an AWS EC2 instance or similar service
+2. Configure MongoDB Atlas or a self-hosted MongoDB instance
+3. Set up environment variables on your server
+4. Use PM2 or similar to manage the Node.js process
+
+### Frontend Deployment
+1. Build the React application with `npm run build`
+2. Deploy the static files to AWS S3, Netlify, Vercel, or similar
+3. Configure CORS on the backend to allow requests from your frontend domain
+
+## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
 1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
 3. Commit your changes (`git commit -m 'Add some amazing feature'`)
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📞 Contact
+## License
 
-For questions or support, please contact us at dxag.info@gmail.com
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgments
+
+- [Wavesurfer.js](https://wavesurfer-js.org/) for the audio visualization
+- [Material-UI](https://mui.com/) for the UI components
+- [Socket.io](https://socket.io/) for the real-time functionality
